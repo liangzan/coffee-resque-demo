@@ -13,9 +13,11 @@ var hdbFlatPrice = "hdb_flat";
 
 setInterval(
     function() {
-	var currHDBValue = client.get(hdbFlatPrice);
 	var increase = 5000;
 	resque.enqueue('high', 'addHDBValue', [increase]);
+
+	var decrease = 1000;
+	resque.enqueue('high', 'subtractHDBValue', [decrease]);
     }, 1000);
 
 

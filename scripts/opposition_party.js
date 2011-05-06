@@ -23,16 +23,15 @@ var workerJobs = {
 	var jobs = new ResqueJobs();
 	jobs.subtractHDBValue(value, callback);      
     }
-
 };
 
 try {
-    var papMinister = require('coffee-resque')
+    var opposition = require('coffee-resque')
 	.connect({timeout: 500})
 	.worker('high', workerJobs);
 
-    papMinister.start();
+    opposition.start();
 } catch (err) {
-    papMinister.end();
-    papMinister.start();
+    opposition.end();
+    opposition.start();
 }
