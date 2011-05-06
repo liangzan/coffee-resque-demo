@@ -12,11 +12,11 @@ The node.js libs required are contained under the node_modules directory. The ot
 ## Running it
 
 1. Start redis
-2. Run these commands
+2. View localhost:3000 on your web browser
+3. Run these commands
 
     $ node scripts/pap_minister.js
     $ node scripts/opposition.js
     $ node scripts/queue_jobs.js
     $ node server.js
 
-3. View localhost:3000 on your web browser
