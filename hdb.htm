@@ -1,0 +1,44 @@
+<!doctype html>
+<html>
+  <head>
+    <title>HDB Prices with Socket.io</title>
+
+    <script src="http://localhost:3000/socket.io/socket.io.js"></script>
+  </head>
+  <body>
+
+    <script>
+      function message(obj){
+        var el = document.createElement('p');
+        el.innerHTML = '<em>' + obj.announcement + '</em>';
+        document.getElementById('chat').appendChild(el);
+        document.getElementById('chat').scrollTop = 1000000;
+      }
+
+      var socket = new io.Socket(null, {port: 3000, rememberTransport: false});
+      socket.connect();
+      socket.on('message', function(obj){
+        if ('buffer' in obj){
+          document.getElementById('form').style.display='block';
+          document.getElementById('chat').innerHTML = '';
+
+          for (var i in obj.buffer) message(obj.buffer[i]);
+        } else message(obj);
+      });
+    </script>
+
+    <h1>Price of HDB Flat</h1>
+    <div id="chat"><p>Connecting...</p></div>
+    <style>
+      #chat { height: 300px; overflow: auto; width: 800px; border: 1px solid #eee; font: 13px Helvetica, Arial; }
+      #chat p { padding: 8px; margin: 0; }
+      #chat p:nth-child(odd) { background: #F6F6F6; }
+      #form { width: 782px; background: #333; padding: 5px 10px; display: none; }
+      #form input[type=text] { width: 700px; padding: 5px; background: #fff; border: 1px solid #fff; }
+      #form input[type=submit] { cursor: pointer; background: #999; border: none; padding: 6px 8px; -moz-border-radius: 8px; -webkit-border-radius: 8px; margin-left: 5px; text-shadow: 0 1px 0 #fff; }
+      #form input[type=submit]:hover { background: #A2A2A2; }
+      #form input[type=submit]:active { position: relative; top: 2px; }
+    </style>
+
+  </body>
+</html>
