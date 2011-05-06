@@ -2,38 +2,32 @@
 <html>
   <head>
     <title>HDB Prices with Socket.io</title>
-
     <script src="http://localhost:3000/socket.io/socket.io.js"></script>
   </head>
+  <style>
+    #price { height: 300px; overflow: auto; width: 800px; border: 1px solid #eee; font: 13px Helvetica, Arial; }
+    #price p { padding: 8px; margin: 0; }
+    #price p:nth-child(odd) { background: #F6F6F6; }
+  </style>
+  <script>
+    function message(obj){
+      var el = document.createElement('p');
+      el.innerHTML = '<em>' + obj.announcement + '</em>';
+      document.getElementById('price').appendChild(el);
+      document.getElementById('price').scrollTop = 1000000;
+    }
+
+    var socket = new io.Socket(null, {port: 3000, rememberTransport: false});
+    socket.connect();
+    socket.on('message', function(obj){
+      if ('buffer' in obj){
+        document.getElementById('price').innerHTML = '';
+        for (var i in obj.buffer) message(obj.buffer[i]);
+      } else message(obj);
+    });
+  </script>
   <body>
-
-    <script>
-      function message(obj){
-        var el = document.createElement('p');
-        el.innerHTML = '<em>' + obj.announcement + '</em>';
-        document.getElementById('price').appendChild(el);
-        document.getElementById('price').scrollTop = 1000000;
-      }
-
-      var socket = new io.Socket(null, {port: 3000, rememberTransport: false});
-      socket.connect();
-      socket.on('message', function(obj){
-        if ('buffer' in obj){
-          document.getElementById('form').style.display='block';
-          document.getElementById('price').innerHTML = '';
-
-          for (var i in obj.buffer) message(obj.buffer[i]);
-        } else message(obj);
-      });
-    </script>
-
     <h1>Price of HDB Flat</h1>
     <div id="price"><p>Connecting...</p></div>
-    <style>
-      #price { height: 300px; overflow: auto; width: 800px; border: 1px solid #eee; font: 13px Helvetica, Arial; }
-      #price p { padding: 8px; margin: 0; }
-      #price p:nth-child(odd) { background: #F6F6F6; }
-    </style>
-
   </body>
 </html>
