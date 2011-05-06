@@ -16,14 +16,7 @@ server = http.createServer(function(req, res){
   var path = url.parse(req.url).pathname;
   switch (path){
     case '/':
-      res.writeHead(200, {'Content-Type': 'text/html'});
-      res.write('<h1>Welcome. To the <a href="/hdb.htm">HDB</a> demo.</h1>');
-      res.end();
-      break;
-      
-    case '/json.js':
-    case '/hdb.htm':
-      fs.readFile(__dirname + path, function(err, data){
+      fs.readFile(__dirname + '/hdb.htm', function(err, data){
         if (err) return send404(res);
         res.writeHead(200, {'Content-Type': path == 'json.js' ? 'text/javascript' : 'text/html'});
         res.write(data, 'utf8');
