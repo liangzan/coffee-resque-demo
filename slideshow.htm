@@ -1,0 +1,190 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+
+  <!--[if lt IE 9]>
+  <script src="../lib/html5shim.js"></script>
+  <![endif]-->
+
+  <!-- These are some core styles the slideshow app requires -->
+  <link rel="stylesheet" href="./stylesheets/core.css" />
+
+  <!-- These are the styles you'll add to make the slides look great -->
+  <link rel="stylesheet" href="./stylesheets/styles.css" />
+
+  <title>Coffee-Resque Demo</title>
+</head>
+<body>
+  <header>
+    <h1>Coffee-Resque Demo</h1>
+    <nav>
+      <ul>
+        <li><button id="prev-btn" title="Previous slide">Previous Slide</button></li>
+        <li><span id="slide-number"></span>/<span id="slide-total"></span></li>
+        <li><button id="next-btn" title="Next Slide">Next Slide</button></li>
+      </ul>
+    </nav>
+  </header>
+  <div id="deck">
+
+    <!-- Begin slides -->
+    <section>
+      <hgroup>
+        <h1>Coffee-Resque Demo</h1>
+        <h2>@liangzan</h2>
+      </hgroup>
+    </section>
+
+    <section>
+      <hgroup>
+        <h1>Brief history</h1>
+      </hgroup>
+      <img src="images/github-logo.png" alt="Github" />
+    </section>
+
+    <section>
+      <hgroup>
+        <h1>Do you have these?</h1>
+	<ul>
+	  <li>Persistence</li>
+	  <li>See what's pending</li>
+	  <li>Modify pending jobs in-place</li>
+	  <li>Tags</li>
+	  <li>Priorities</li>
+	  <li>Fast pushing and popping</li>
+	  <li>See what workers are doing</li>
+	  <li>See what workers have done</li>
+	  <li>See failed jobs</li>
+	  <li>Kill fat workers</li>
+	  <li>Kill stale workers</li>
+	  <li>Kill workers that are running too long</li>
+	  <li>Keep Rails loaded / persistent workers</li>
+	  <li>Distributed workers (run them on multiple machines)</li>
+	  <li>Workers can watch multiple (or all) tags</li>
+	  <li>Don't retry failed jobs</li>
+	  <li>Don't "release" failed jobs</li>
+	</ul>
+      </hgroup>
+    </section>
+
+    <section>
+      <hgroup>
+        <h1>Ruby Resque</h1>
+	<h2>A redis backed ruby library for creating background jobs</h2>
+      </hgroup>
+      <img src="images/redis-logo.png" alt="Redis" />
+    </section>
+
+    <section>
+      <hgroup>
+        <h1>How it works</h1>
+	<ul>
+	  <li class="action">enqueue jobs on queues on redis</li>
+	  <li class="action">
+	    workers poll the queue and perform the job
+	    <img src="images/workers.jpg" alt="workers"/>
+	  </li>
+	</ul>
+      </hgroup>
+    </section>
+
+    <section>
+      <hgroup>
+        <h1>Coffee-resque?</h1>
+	<h2>Coffeescript implementation</h2>
+	<h2>Rick Olson(@technoweenie)</h2>
+	<img src="images/coffeescript-logo.png" alt="coffeescript"/>
+	<img src="images/nodejs-logo.png" alt="nodejs"/>
+      </hgroup>
+    </section>
+
+    <section>
+      <hgroup>
+        <h1>What are the differences??</h1>
+	<ul>
+	  <li class="action">No web frontend</li>
+	  <li class="action">No plugins(yet)</li>
+	</ul>
+      </hgroup>
+    </section>
+
+    <section>
+      <hgroup>
+        <h1>Demo time - Enhancing the value of HDB flat</h1>
+	<h2>PAP - job is to enhance the value</h2>
+	<h2>Opposition - job is to keep the value affordable</h2>
+	<h2><a href="http://localhost:3000">Flat prices</a></h2>
+      </hgroup>
+    </section>
+
+    <section>
+      <hgroup>
+        <h1>Why use coffee-resque?</h1>
+	<ul>
+	  <li class="action">node.js compatible</li>
+	  <li class="action">fast?</li>
+	</ul>
+      </hgroup>
+    </section>
+
+    <section>
+      <hgroup>
+        <h1>When using the library</h1>
+	<ul>
+	  <li class="action">Be careful of uncaught exceptions</li>
+	  <li class="action">You MUST callback</li>
+	  <li class="action">If the job is complex, put it in an object</li>
+	</ul>
+      </hgroup>
+    </section>
+
+    <section>
+      <hgroup>
+        <h1>Thoughts on Node.js</h1>
+	<ul>
+	  <li class="action">Great for event driven apps</li>
+	  <li class="action">Real easy to prototype network apps</li>
+	  <li class="action">You are stuck with the aysnc model</li>
+	  <li class="action">Code can get unwieldy if you're not careful</li>
+	  <li class="action">Libs are good, increasing, but... not as mature yet</li>
+	</ul>
+      </hgroup>
+    </section>
+
+    <section>
+      <hgroup>
+        <h1>That's it!</h1>
+      </hgroup>
+      <h2>It's at <a href="http://liangzan.github.com/coffee-resque-demo">Coffee-Resque Demo</a>.</h2>
+      <p>Wong Liang Zan / <a href="http://twitter.com/liangzan">@liangzan</a> / <a href="mailto:zan@liangzan.net">zan@liangzan.net</a></p>
+    </section>
+    <!-- /End slides -->
+
+  </div>
+  <!-- /deck -->
+  <script src="./javascripts/jquery-1.5.2.min.js"></script>
+  <script src="./javascripts/htmlSlides.js"></script>
+  <script>
+    //Do our business when the DOM is ready for us
+    $(function() {
+
+      //You can trigger Javascript based on the slide number like this:
+      $('html').bind('newSlide', function(e, id) {
+        switch(id) {
+          case 2:
+            console.log('This is the second slide.');;
+            break;
+          case 3:
+            console.log('Hello, third slide.');
+            break;
+        }
+      });
+
+      //One little option: hideToolbar (boolean; default = false)
+      htmlSlides.init({ hideToolbar: true });
+
+    });
+  </script>
+  </body>
+</html>
