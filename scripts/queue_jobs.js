@@ -6,7 +6,8 @@ config = require('../config/initialize'),
 Logger = require('../lib/log').Logger,
 redis = require('../node_modules/redis'),
 client = redis.createClient(),
-resque = require('coffee-resque').connect();
+resque = require('coffee-resque').connect(),
+_ = require('../node_modules/underscore');
 
 var log = new Logger();
 var hdbFlatPrice = "hdb_flat";
